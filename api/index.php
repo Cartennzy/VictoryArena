@@ -4,7 +4,8 @@
 putenv('LOG_CHANNEL=stderr');
 putenv('CACHE_DRIVER=file');
 putenv('CACHE_STORE=file');
-putenv('SESSION_DRIVER=cookie');
+putenv('SESSION_DRIVER=file');
+putenv('SESSION_LIFETIME=120');
 
 // Force direktori cache Laravel ke /tmp
 putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
@@ -13,7 +14,7 @@ putenv('APP_CONFIG_CACHE=/tmp/config.php');
 putenv('APP_ROUTES_CACHE=/tmp/routes.php');
 putenv('APP_EVENTS_CACHE=/tmp/events.php');
 
-// Siapkan folder storage sementara
+// Siapkan folder storage sementara di /tmp
 $storagePaths = [
     '/tmp/storage/framework/views',
     '/tmp/storage/framework/cache',
@@ -33,6 +34,12 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 
 // Gunakan /tmp sebagai root storage runtime
 $app->useStoragePath('/tmp/storage');
+
+// Pastikan konfigurasi session lifetime bernilai integer murni
+$app->booted(function () use ($app) {
+    $app['config']->set('session.lifetime', 120);
+    $app['config']->set('session.driver', 'file');
+});
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
