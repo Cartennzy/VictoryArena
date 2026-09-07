@@ -41,14 +41,14 @@
         cursor: pointer;
     }
     .btn-action:hover {
-        transform: translateY(-2.5px);
+        transform: translateY(-2px);
     }
     .btn-action:active {
         transform: translateY(1.5px) scale(0.97) !important;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
     }
 
-    /* Ripple Wave Animation Element */
+    /* Ripple Wave Animation */
     .ripple-wave {
         position: absolute;
         border-radius: 50%;
@@ -82,58 +82,76 @@
 <div class="bg-[#080d1a] text-slate-100 font-sports min-h-screen selection:bg-red-600 selection:text-white flex flex-col justify-between">
 
     {{-- ================= TOP BANNER & NAVBAR ================= --}}
-    <header class="sticky top-0 z-40 bg-[#080d1a]/90 backdrop-blur-xl border-b border-slate-800/80">
-        <div class="bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-[11px] font-black uppercase tracking-widest text-white py-1.5 px-6 text-center shadow-md">
-            <i class="fa-solid fa-trophy mr-1 text-yellow-300"></i> The Official Booking Portal of Victory Arena • One Team, One Dream
+    <header class="sticky top-0 z-40 bg-[#080d1a]/95 backdrop-blur-xl border-b border-slate-800/80">
+        {{-- Banner Atas --}}
+        <div class="bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-[10px] sm:text-xs font-black uppercase tracking-widest text-white py-1.5 px-4 text-center shadow-md">
+            <i class="fa-solid fa-trophy mr-1.5 text-yellow-300"></i> The Official Booking Portal of Victory Arena &bull; One Team, One Dream
         </div>
 
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 shrink-0 group">
-                <div class="w-11 h-11 rounded-2xl overflow-hidden bg-slate-900 border border-red-600/40 shadow-lg shadow-red-600/20 flex items-center justify-center p-1 shrink-0 group-hover:scale-105 transition-transform">
+        {{-- Nav Utama --}}
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            {{-- Brand & Logo Bundar --}}
+            <a href="#" class="flex items-center gap-2.5 sm:gap-3.5 shrink-0 group">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-slate-900 border-2 border-red-600 shadow-md shadow-red-600/30 flex items-center justify-center p-0.5 shrink-0 group-hover:scale-105 transition-transform duration-300">
                     <img src="{{ asset('assets/logo-victory-arena.png') }}" 
                          alt="Victory Arena Logo" 
-                         class="w-full h-full object-contain"
-                         onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-futbol text-red-500 text-xl\'></i>';">
+                         class="w-full h-full object-cover rounded-full"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-futbol text-red-500 text-lg\'></i>';">
                 </div>
                 <div>
-                    <span class="text-lg sm:text-xl font-black uppercase tracking-wider text-white">VICTORY <span class="text-red-500">ARENA</span></span>
-                    <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">Futsal Stadium & Booking</span>
+                    <span class="text-base sm:text-xl font-black uppercase tracking-wider text-white">VICTORY <span class="text-red-500">ARENA</span></span>
+                    <span class="block text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none">Futsal Stadium & Booking</span>
                 </div>
             </a>
 
+            {{-- Menu Desktop --}}
             <div class="hidden md:flex items-center gap-8 text-xs font-black uppercase tracking-wider text-slate-300">
-                <a href="#" class="hover:text-red-500 transition-colors">Home</a>
-                <a href="#lapangan" class="hover:text-red-500 transition-colors">Arena & Jadwal</a>
-                <a href="#harga" class="hover:text-red-500 transition-colors">Daftar Harga</a>
-                <a href="#fasilitas" class="hover:text-red-500 transition-colors">Fasilitas</a>
-                <a href="#kontak" class="hover:text-red-500 transition-colors">Kontak</a>
+                <a href="#" class="hover:text-red-500 transition-colors duration-200">Home</a>
+                <a href="#lapangan" class="hover:text-red-500 transition-colors duration-200">Arena & Jadwal</a>
+                <a href="#harga" class="hover:text-red-500 transition-colors duration-200">Daftar Harga</a>
+                <a href="#fasilitas" class="hover:text-red-500 transition-colors duration-200">Fasilitas</a>
+                <a href="#kontak" class="hover:text-red-500 transition-colors duration-200">Kontak</a>
             </div>
 
-            <div class="flex items-center gap-2.5">
-                <a href="{{ route('login') }}" class="btn-action px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/30">
-                    <i class="fa fa-user mr-2 text-xs"></i> Masuk / Login
+            {{-- Action Buttons --}}
+            <div class="flex items-center gap-2">
+                <a href="{{ route('login') }}" 
+                   class="btn-action px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider shadow-lg shadow-red-600/30">
+                    <i class="fa fa-user mr-1.5 sm:mr-2 text-xs"></i> 
+                    <span>Masuk</span><span class="hidden sm:inline">&nbsp;/ Login</span>
                 </a>
 
+                {{-- Hamburger Menu Mobile Button --}}
                 <button type="button" 
                         onclick="toggleMobileMenu()" 
-                        class="md:hidden w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-200 hover:text-white hover:border-red-600 transition-colors focus:outline-none"
+                        class="md:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-200 hover:text-white hover:border-red-600 transition-colors focus:outline-none"
                         aria-label="Toggle Navigation">
-                    <i id="menuIcon" class="fa fa-bars text-base"></i>
+                    <i id="menuIcon" class="fa fa-bars text-sm"></i>
                 </button>
             </div>
         </nav>
 
-        {{-- Mobile Dropdown Menu --}}
-        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-[#080d1a]/98 px-6 py-4 space-y-3 transition-all">
-            <a href="#" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Home</a>
-            <a href="#lapangan" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Arena & Jadwal</a>
-            <a href="#harga" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Daftar Harga</a>
-            <a href="#fasilitas" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Fasilitas</a>
-            <a href="#kontak" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Kontak</a>
+        {{-- Mobile Dropdown Menu (Clean Mobile SaaS Sheet) --}}
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800/90 bg-[#090e1c] px-5 py-4 space-y-2 transition-all duration-300 shadow-2xl">
+            <a href="#" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">
+                <i class="fa fa-home w-4 text-red-500"></i> Home
+            </a>
+            <a href="#lapangan" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">
+                <i class="fa fa-futbol w-4 text-red-500"></i> Arena & Jadwal
+            </a>
+            <a href="#harga" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">
+                <i class="fa fa-tags w-4 text-red-500"></i> Daftar Harga
+            </a>
+            <a href="#fasilitas" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">
+                <i class="fa fa-shield-halved w-4 text-red-500"></i> Fasilitas
+            </a>
+            <a href="#kontak" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">
+                <i class="fa fa-phone w-4 text-red-500"></i> Kontak
+            </a>
             
-            <div class="pt-3 border-t border-slate-800">
+            <div class="pt-3 border-t border-slate-800/80">
                 <a href="{{ route('login') }}" class="btn-action w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-wider shadow-md shadow-red-600/30">
-                    <i class="fa fa-user mr-2 text-xs"></i> Masuk / Login Akun
+                    <i class="fa fa-arrow-right-to-bracket mr-2 text-xs"></i> Masuk ke Portal Akun
                 </a>
             </div>
         </div>
@@ -141,38 +159,38 @@
 
     <div>
         {{-- ================= HERO SECTION ================= --}}
-        <section class="relative pt-16 sm:pt-20 pb-20 sm:pb-24 overflow-hidden border-b border-slate-800/80">
+        <section class="relative pt-12 sm:pt-20 pb-16 sm:pb-24 overflow-hidden border-b border-slate-800/80">
             <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[760px] h-[500px] bg-red-600/15 rounded-full blur-[140px] pointer-events-none" style="animation: pulseGlow 7s ease-in-out infinite;"></div>
             <div class="absolute top-1/2 -left-32 w-80 h-80 bg-blue-900/15 rounded-full blur-[120px] pointer-events-none"></div>
 
-            <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <div class="max-w-5xl mx-auto px-5 sm:px-6 relative z-10 text-center">
                 <div class="space-y-6 sm:space-y-8 animate-hero">
                     
-                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-red-950/60 border border-red-800/60 text-red-400 text-[11px] font-black tracking-widest uppercase mx-auto shadow-sm">
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-red-950/60 border border-red-800/60 text-red-400 text-[10px] sm:text-[11px] font-black tracking-widest uppercase mx-auto shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                        Victory Arena • Official Booking Platform
+                        Victory Arena &bull; Official Booking Platform
                     </div>
 
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[1] sm:leading-[0.95] text-white">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[1.05] sm:leading-[0.95] text-white">
                         Together <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-rose-400">
                             We Rise & Play!
                         </span>
                     </h1>
 
-                    <p class="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+                    <p class="text-sm sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed px-2">
                         Sistem reservasi lapangan futsal berstandar turnamen resmi dengan pengecekan jadwal real-time, instan, transparan, dan terintegrasi penuh.
                     </p>
 
-                    <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2">
                         <a href="#lapangan" 
-                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-red-600/35">
+                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-red-600/35">
                             Pilih Lapangan & Jadwal
                             <i class="fa fa-arrow-right ml-3 text-xs"></i>
                         </a>
 
                         <a href="#harga" 
-                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm hover:border-slate-500">
+                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-xs sm:text-sm hover:border-slate-500">
                             <i class="fa fa-tags mr-2 text-red-500"></i> Cek Tarif Sewa
                         </a>
                     </div>
@@ -180,11 +198,11 @@
                     <div class="max-w-xl mx-auto pt-4">
                         <div class="bg-slate-900/80 border border-slate-800/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 flex items-center justify-center gap-4 shadow-xl text-left">
                             <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 flex items-center justify-center shrink-0 border border-red-500/30">
-                                <i class="fa-solid fa-shield-halved text-lg"></i>
+                                <i class="fa-solid fa-shield-halved text-base sm:text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-sm sm:text-base">Kenapa Victory Arena?</h4>
-                                <p class="text-xs text-slate-400 mt-0.5">
+                                <h4 class="font-bold text-white text-xs sm:text-sm md:text-base">Kenapa Victory Arena?</h4>
+                                <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5 leading-relaxed">
                                     Booking praktis tanpa tabrakan jadwal, status live availability, dan fasilitas pro.
                                 </p>
                             </div>
@@ -197,34 +215,34 @@
 
         {{-- ================= STATS BAR ================= --}}
         <section class="border-b border-slate-800/80 bg-slate-950/70">
-            <div class="max-w-7xl mx-auto px-6 py-6 sm:py-8">
+            <div class="max-w-7xl mx-auto px-5 sm:px-6 py-6 sm:py-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-800/60">
                     <div class="flex items-center justify-center gap-3">
-                        <i class="fa fa-trophy text-red-500 text-2xl"></i>
+                        <i class="fa fa-trophy text-red-500 text-xl sm:text-2xl"></i>
                         <div class="text-left">
                             <p class="text-2xl sm:text-3xl font-black text-white leading-tight">3</p>
-                            <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Arena Courts</p>
+                            <p class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-slate-400">Arena Courts</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-3 pl-4">
-                        <i class="fa fa-futbol text-red-500 text-2xl"></i>
+                    <div class="flex items-center justify-center gap-3 pl-3 sm:pl-4">
+                        <i class="fa fa-futbol text-red-500 text-xl sm:text-2xl"></i>
                         <div class="text-left">
                             <p class="text-2xl sm:text-3xl font-black text-white leading-tight">1.5K+</p>
-                            <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Matches Played</p>
+                            <p class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-slate-400">Matches Played</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-3 pl-4">
-                        <i class="fa fa-users text-red-500 text-2xl"></i>
+                    <div class="flex items-center justify-center gap-3 pl-3 sm:pl-4">
+                        <i class="fa fa-users text-red-500 text-xl sm:text-2xl"></i>
                         <div class="text-left">
                             <p class="text-2xl sm:text-3xl font-black text-white leading-tight">100+</p>
-                            <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">Active Squads</p>
+                            <p class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-slate-400">Active Squads</p>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-3 pl-4">
-                        <i class="fa fa-calendar-check text-red-500 text-2xl"></i>
+                    <div class="flex items-center justify-center gap-3 pl-3 sm:pl-4">
+                        <i class="fa fa-calendar-check text-red-500 text-xl sm:text-2xl"></i>
                         <div class="text-left">
                             <p class="text-2xl sm:text-3xl font-black text-white leading-tight">EST.</p>
-                            <p class="text-[11px] uppercase tracking-wider font-semibold text-slate-400">2024 Built</p>
+                            <p class="text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold text-slate-400">2024 Built</p>
                         </div>
                     </div>
                 </div>
@@ -232,24 +250,24 @@
         </section>
 
         {{-- ================= LAPANGAN SECTION ================= --}}
-        <section class="py-20 sm:py-24 bg-[#080d1a]" id="lapangan">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16">
+        <section class="py-16 sm:py-24 bg-[#080d1a]" id="lapangan">
+            <div class="max-w-7xl mx-auto px-5 sm:px-6">
+                <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
                     <span class="text-red-500 text-xs font-black tracking-widest uppercase mb-2 block">Arenas Selection</span>
                     <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
                         Pilih Arena Bermainmu
                     </h2>
-                    <p class="text-slate-400 text-sm sm:text-base mt-3">
+                    <p class="text-slate-400 text-xs sm:text-base mt-3">
                         Setiap lapangan dilengkapi fasilitas turnamen terawat, pencahayaan LED pro-lux, dan permukaan lantai anti slip.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                     @for($i=1; $i<=3; $i++)
                     <div class="saas-card group rounded-3xl overflow-hidden flex flex-col justify-between">
                         
                         <div>
-                            <div class="relative h-64 overflow-hidden bg-slate-950">
+                            <div class="relative h-56 sm:h-64 overflow-hidden bg-slate-950">
                                 <img src="{{ asset('assets/lapangan'.$i.'.jpg') }}"
                                      alt="Victory Field {{ $i }}"
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -257,7 +275,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-[#0f1523] via-transparent to-black/30"></div>
 
                                 <div class="absolute top-4 left-4 z-10">
-                                    <span class="px-3.5 py-1 bg-red-600 text-white font-black text-xs uppercase tracking-wider rounded-lg shadow-md">
+                                    <span class="px-3 py-1 bg-red-600 text-white font-black text-[11px] uppercase tracking-wider rounded-lg shadow-md">
                                         ARENA {{ $i }}
                                     </span>
                                 </div>
@@ -268,21 +286,21 @@
                                 </div>
                             </div>
 
-                            <div class="p-6">
+                            <div class="p-5 sm:p-6">
                                 <div class="flex items-baseline justify-between mb-2">
-                                    <h3 class="text-2xl font-black uppercase tracking-wide text-white group-hover:text-red-500 transition-colors">
+                                    <h3 class="text-xl sm:text-2xl font-black uppercase tracking-wide text-white group-hover:text-red-500 transition-colors">
                                         Victory Field {{ $i }}
                                     </h3>
                                 </div>
 
                                 <div class="mb-4 inline-flex items-baseline gap-1.5 px-3 py-1 rounded-lg bg-red-950/50 border border-red-800/40 text-red-400">
-                                    <span class="text-xs font-bold">Mulai</span>
-                                    <span class="text-base font-black text-white">Rp 120.000</span>
-                                    <span class="text-[11px] text-slate-400 font-medium">/ jam</span>
+                                    <span class="text-[11px] font-bold">Mulai</span>
+                                    <span class="text-sm sm:text-base font-black text-white">Rp 120.000</span>
+                                    <span class="text-[10px] text-slate-400 font-medium">/ jam</span>
                                 </div>
 
                                 <p class="text-xs text-slate-400 mt-1 mb-4 flex items-center gap-2">
-                                    <i class="fa fa-check-circle text-red-500"></i> Vinyl Interlock • High Lux LED • Digital Scoreboard
+                                    <i class="fa fa-check-circle text-red-500"></i> Vinyl Interlock &bull; High Lux LED &bull; Digital Scoreboard
                                 </p>
 
                                 <div class="space-y-2 py-3 border-t border-b border-slate-800 text-xs text-slate-300">
@@ -298,7 +316,7 @@
                             </div>
                         </div>
 
-                        <div class="p-6 pt-0">
+                        <div class="p-5 sm:p-6 pt-0">
                             <button onclick="openJadwal('Lapangan {{ $i }}')"
                                     class="btn-action w-full py-3.5 rounded-xl bg-red-600/15 border border-red-600/40 text-red-400 hover:bg-red-600 hover:text-white font-black text-xs uppercase tracking-wider shadow-sm">
                                 <i class="fa fa-calendar-check mr-2"></i> Lihat Jadwal & Booking
@@ -312,21 +330,21 @@
         </section>
 
         {{-- ================= SECTION: CTA & PRICELIST ================= --}}
-        <section class="py-20 bg-slate-950 border-t border-b border-slate-800/80 relative overflow-hidden" id="harga">
+        <section class="py-16 sm:py-20 bg-slate-950 border-t border-b border-slate-800/80 relative overflow-hidden" id="harga">
             <div class="absolute -right-24 top-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/10 blur-[130px] pointer-events-none"></div>
 
-            <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="text-center max-w-2xl mx-auto mb-16">
+            <div class="max-w-7xl mx-auto px-5 sm:px-6 relative z-10">
+                <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
                     <span class="text-red-500 text-xs font-black tracking-widest uppercase mb-2 block">Clear & Fair Pricing</span>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white">
                         Tarif Sewa & Membership
                     </h2>
-                    <p class="text-slate-400 text-sm mt-3">
+                    <p class="text-slate-400 text-xs sm:text-sm mt-3">
                         Harga transparan tanpa biaya tersembunyi. Sudah termasuk peminjaman bola resmi, rompi tanding, dan scoreboard digital.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch">
                     
                     {{-- Slot Siang --}}
                     <div class="rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
@@ -359,7 +377,7 @@
                     {{-- Prime Time --}}
                     <div class="rounded-3xl bg-gradient-to-b from-[#141b2c] via-[#0f1523] to-red-950/40 border-2 border-red-600 p-6 sm:p-8 flex flex-col justify-between relative shadow-2xl shadow-red-600/15">
                         <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest px-4 py-1 rounded-full shadow-md whitespace-nowrap">
-                            MOST POPULAR • PRIME TIME
+                            MOST POPULAR &bull; PRIME TIME
                         </div>
 
                         <div>
@@ -423,23 +441,23 @@
         </section>
 
         {{-- ================= HIGHLIGHT CARDS ================= --}}
-        <section class="py-20 border-b border-slate-800/80 bg-[#070b16]" id="fasilitas">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid lg:grid-cols-12 gap-8">
+        <section class="py-16 sm:py-20 border-b border-slate-800/80 bg-[#070b16]" id="fasilitas">
+            <div class="max-w-7xl mx-auto px-5 sm:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     
                     <div class="lg:col-span-6 rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
-                        <div class="absolute top-0 left-0 bg-red-600 text-white text-[11px] font-black uppercase tracking-wider px-4 py-1 rounded-br-xl">
+                        <div class="absolute top-0 left-0 bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3 sm:px-4 py-1 rounded-br-xl">
                             FACILITY SPOTLIGHT
                         </div>
                         <div class="pt-4">
-                            <div class="rounded-2xl overflow-hidden mb-6 h-56 border border-slate-800 bg-slate-950">
+                            <div class="rounded-2xl overflow-hidden mb-6 h-52 sm:h-56 border border-slate-800 bg-slate-950">
                                 <img src="{{ asset('assets/lapangan1.jpg') }}" 
                                      alt="Venue Highlight" 
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                      onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80';">
                             </div>
-                            <h3 class="text-2xl font-black uppercase text-white mb-2">Standar Lantai Vinyl Anti-Selip</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            <h3 class="text-xl sm:text-2xl font-black uppercase text-white mb-2">Standar Lantai Vinyl Anti-Selip</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
                                 Dirancang khusus untuk meredam benturan sendi dan mempercepat akselerasi lari. Dilengkapi blower silang agar sirkulasi udara lapangan tetap sejuk saat tensi laga memanas.
                             </p>
                         </div>
@@ -449,11 +467,11 @@
                     </div>
 
                     <div class="lg:col-span-6 rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
-                        <div class="absolute top-0 left-0 bg-red-600 text-white text-[11px] font-black uppercase tracking-wider px-4 py-1 rounded-br-xl">
+                        <div class="absolute top-0 left-0 bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3 sm:px-4 py-1 rounded-br-xl">
                             RESERVATION EXPERIENCE
                         </div>
                         <div class="pt-4 flex flex-col sm:flex-row gap-6 items-center">
-                            <div class="w-full sm:w-1/2 rounded-2xl overflow-hidden h-56 border border-slate-800 bg-slate-950">
+                            <div class="w-full sm:w-1/2 rounded-2xl overflow-hidden h-52 sm:h-56 border border-slate-800 bg-slate-950">
                                 <img src="{{ asset('assets/lapangan2.jpg') }}" 
                                      alt="Match Management" 
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -461,7 +479,7 @@
                             </div>
                             <div class="w-full sm:w-1/2">
                                 <p class="text-red-500 text-xs font-black uppercase tracking-widest mb-1">Instant Access</p>
-                                <h3 class="text-2xl font-black uppercase text-white mb-2">Papan Skor & Timer Digital</h3>
+                                <h3 class="text-xl sm:text-2xl font-black uppercase text-white mb-2">Papan Skor & Timer Digital</h3>
                                 <p class="text-slate-400 text-xs leading-relaxed mb-4">
                                     Nikmati atmosfer turnamen resmi dengan operator scoreboard digital, ruang bilas higienis, dan tribun penonton.
                                 </p>
@@ -484,24 +502,24 @@
 
         {{-- ================= UPCOMING MATCH BANNER ================= --}}
         <section class="py-12 bg-gradient-to-r from-red-950/40 via-slate-900 to-slate-950 border-b border-slate-800/80">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="rounded-3xl border border-red-600/30 bg-slate-950/70 p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
-                    <div class="flex items-center gap-6">
-                        <div class="w-16 h-16 rounded-2xl bg-red-600/20 border border-red-500/40 text-red-500 flex items-center justify-center shrink-0">
-                            <i class="fa fa-calendar-alt text-2xl"></i>
+            <div class="max-w-7xl mx-auto px-5 sm:px-6">
+                <div class="rounded-3xl border border-red-600/30 bg-slate-950/70 p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center gap-4 sm:gap-6">
+                        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-red-600/20 border border-red-500/40 text-red-500 flex items-center justify-center shrink-0">
+                            <i class="fa fa-calendar-alt text-xl sm:text-2xl"></i>
                         </div>
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="px-2.5 py-0.5 rounded bg-red-600 text-[10px] font-black uppercase tracking-wider text-white">NEXT SLOT</span>
-                                <p class="text-xs text-slate-400 uppercase tracking-wider">TODAY SCHEDULE</p>
+                                <span class="px-2 py-0.5 rounded bg-red-600 text-[10px] font-black uppercase tracking-wider text-white">NEXT SLOT</span>
+                                <p class="text-[11px] sm:text-xs text-slate-400 uppercase tracking-wider">TODAY SCHEDULE</p>
                             </div>
-                            <h3 class="text-2xl sm:text-3xl font-black uppercase text-white mt-1">Pilih Jam & Langsung Kick-Off</h3>
-                            <p class="text-sm text-slate-400">08:00 - 22:00 WIB • Grand Wisata Tambun Selatan</p>
+                            <h3 class="text-xl sm:text-3xl font-black uppercase text-white mt-1">Pilih Jam & Langsung Kick-Off</h3>
+                            <p class="text-xs sm:text-sm text-slate-400">08:00 - 22:00 WIB &bull; Grand Wisata Tambun Selatan</p>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-4">
-                        <a href="#lapangan" class="btn-action px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-red-600/30">
+                    <div class="flex items-center w-full lg:w-auto">
+                        <a href="#lapangan" class="btn-action w-full lg:w-auto px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-red-600/30">
                             Cek Ketersediaan Jam <i class="fa fa-chevron-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -510,9 +528,9 @@
         </section>
 
         {{-- ================= BENEFIT / PILLARS ================= --}}
-        <section class="py-14 bg-slate-950 border-t border-b border-slate-800/80">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section class="py-12 sm:py-14 bg-slate-950 border-t border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-5 sm:px-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                     <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
                         <i class="fa fa-bolt text-red-500 text-2xl"></i>
                         <div>
@@ -547,31 +565,31 @@
     </div>
 
     {{-- ================= FOOTER ================= --}}
-    <footer class="bg-[#050811] border-t border-slate-800/80 pt-16 pb-8" id="kontak">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">
+    <footer class="bg-[#050811] border-t border-slate-800/80 pt-12 sm:pt-16 pb-8" id="kontak">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-slate-800/80">
                 
                 <div class="md:col-span-5 space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-2xl overflow-hidden bg-slate-900 border border-red-600/40 shadow-md shadow-red-600/20 flex items-center justify-center p-1 shrink-0">
+                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-slate-900 border-2 border-red-600 shadow-md shadow-red-600/30 flex items-center justify-center p-0.5 shrink-0">
                             <img src="{{ asset('assets/logo-victory-arena.png') }}" 
                                  alt="Victory Arena Logo" 
-                                 class="w-full h-full object-contain"
-                                 onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-futbol text-red-500 text-2xl\'></i>';">
+                                 class="w-full h-full object-cover rounded-full"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-futbol text-red-500 text-xl\'></i>';">
                         </div>
                         <div>
-                            <span class="text-xl font-black uppercase tracking-wider text-white">VICTORY <span class="text-red-500">ARENA</span></span>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none">One Team, One Dream</p>
+                            <span class="text-lg sm:text-xl font-black uppercase tracking-wider text-white">VICTORY <span class="text-red-500">ARENA</span></span>
+                            <p class="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest leading-none">One Team, One Dream</p>
                         </div>
                     </div>
                     <p class="text-xs text-slate-400 max-w-sm leading-relaxed">
                         Pusat pelatihan dan arena futsal modern di Grand Wisata. Menyediakan fasilitas terbaik untuk mabar komunitas maupun turnamen profesional antar-klub.
                     </p>
                     <div class="flex items-center gap-3 pt-2">
-                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-facebook-f text-xs"></i></a>
-                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
-                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-whatsapp text-xs"></i></a>
-                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-youtube text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-whatsapp text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-youtube text-xs"></i></a>
                     </div>
                 </div>
 
@@ -605,9 +623,9 @@
 
             </div>
 
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-                <p>© {{ date('Y') }} Victory Arena Futsal. All Rights Reserved.</p>
-                <div class="flex gap-6">
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 text-center sm:text-left">
+                <p>&copy; {{ date('Y') }} Victory Arena Futsal. All Rights Reserved.</p>
+                <div class="flex gap-4 sm:gap-6 justify-center">
                     <a href="#" class="hover:text-slate-400">Privacy Policy</a>
                     <a href="#" class="hover:text-slate-400">Terms of Use</a>
                     <a href="#" class="hover:text-slate-400">Rules & Regulations</a>
@@ -627,18 +645,18 @@
         <div class="flex justify-between items-start mb-6 border-b border-slate-800 pb-4">
             <div>
                 <span class="px-2.5 py-0.5 rounded bg-red-600 text-white font-black text-[10px] uppercase tracking-wider">LIVE SCHEDULE</span>
-                <h3 class="font-black text-2xl uppercase tracking-tight text-white mt-1">Jadwal Lapangan</h3>
+                <h3 class="font-black text-xl sm:text-2xl uppercase tracking-tight text-white mt-1">Jadwal Lapangan</h3>
                 <p class="text-xs text-slate-400" id="modalSubtitle">Pilih slot waktu yang tersedia</p>
             </div>
-            <button onclick="closeModal()" class="w-9 h-9 rounded-full bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-colors flex items-center justify-center">
-                <i class="fa fa-times"></i>
+            <button onclick="closeModal()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-800 text-slate-400 hover:bg-red-600 hover:text-white transition-colors flex items-center justify-center">
+                <i class="fa fa-times text-xs sm:text-sm"></i>
             </button>
         </div>
 
         <div class="mb-5">
             <label class="block text-xs uppercase font-extrabold tracking-wider text-slate-400 mb-2">Pilih Tanggal Main</label>
             <input type="date" id="jadwalTanggal"
-                   class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all">
+                   class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none transition-all text-xs sm:text-sm">
         </div>
 
         <div class="flex flex-wrap gap-4 mb-6 text-xs font-semibold text-slate-300">
@@ -654,7 +672,7 @@
         </div>
 
         <div id="jadwalGrid"
-             class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-[42vh] overflow-y-auto pr-2 custom-scrollbar">
+             class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 max-h-[42vh] overflow-y-auto pr-2 custom-scrollbar">
         </div>
 
         <p class="text-[11px] text-slate-500 text-center mt-5">
