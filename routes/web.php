@@ -17,6 +17,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PublicLandingController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,40 @@ Route::get('/landing-live-stats', function () {
             ->count()
     ]);
 });
+
+/*
+|--------------------------------------------------------------------------
+| PUBLIC JADWAL GRID (HYBRID ROUTE)
+|--------------------------------------------------------------------------
+*/
+Route::get('/jadwal-grid', [CustomerBookingController::class, 'jadwalGrid'])->name('jadwal.grid');
+
+/*
+|--------------------------------------------------------------------------
+| SMART BOOKING ENTRY (REDIRECT PENGUNJUNG NON-LOGIN)
+|--------------------------------------------------------------------------
+*/
+Route::get('/booking', function (Request $request) {
+    if (!Auth::check()) {
+        return redirect()->route('login', [
+            'redirect'   => 'booking',
+            'field'      => $request->query('field'),
+            'date'       => $request->query('date'),
+            'start_time' => $request->query('start_time'),
+            'end_time'   => $request->query('end_time'),
+        ])->with('info', 'Silakan login terlebih dahulu untuk melanjutkan reservasi.');
+    }
+
+    if (Auth::user()->role === 'admin') {
+        return redirect()->route('dashboard');
+    }
+
+    if (empty(Auth::user()->phone)) {
+        return redirect()->route('customer.customer.form')->with('warning', 'Silakan lengkapi data diri Anda terlebih dahulu.');
+    }
+
+    return app(CustomerBookingController::class)->create($request);
+})->name('customer.booking');
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +121,6 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     // Booking & Riwayat Khusus Customer
     Route::middleware(['customer.data'])->group(function () {
         Route::get('/reservations', [CustomerBookingController::class, 'index'])->name('customer.reservations.index');
-        Route::get('/booking', [CustomerBookingController::class, 'create'])->name('customer.booking');
         Route::post('/booking', [CustomerBookingController::class, 'store'])->name('customer.booking.store');
         Route::get('/booking/schedule', [CustomerBookingController::class, 'getBookedSchedule'])->name('customer.booking.schedule');
     });
@@ -112,13 +146,6 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::post('/midtrans/callback', [PaymentController::class, 'callback']);
-
-/*
-|--------------------------------------------------------------------------
-| PUBLIC JADWAL GRID (HYBRID ROUTE)
-|--------------------------------------------------------------------------
-*/
-Route::get('/jadwal-grid', [CustomerBookingController::class, 'jadwalGrid'])->name('jadwal.grid');
 
 /*
 |--------------------------------------------------------------------------

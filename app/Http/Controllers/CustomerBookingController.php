@@ -72,19 +72,28 @@ class CustomerBookingController extends Controller
     }
 
     /**
-     * FORM BOOKING LAPANGAN
+     * FORM BOOKING LAPANGAN (MENERIMA QUERY PARAM DARI LANDING)
      */
-    public function create()
+    public function create(Request $request = null)
     {
         $user = Auth::user();
 
         if (empty($user->phone)) {
-            return redirect()->route('customer.customer.form')->with('info', 'Lengkapi data customer terlebih dahulu.');
+            return redirect()->route('customer.customer.form')->with('warning', 'Silakan lengkapi nomor telepon Anda terlebih dahulu.');
         }
 
+        // Tangkap parameter opsional dari landing page
+        $prefilled = [
+            'field'      => $request ? $request->query('field', 'Lapangan 1') : 'Lapangan 1',
+            'date'       => $request ? $request->query('date', date('Y-m-d')) : date('Y-m-d'),
+            'start_time' => $request ? $request->query('start_time', '08:00') : '08:00',
+            'end_time'   => $request ? $request->query('end_time', '09:00') : '09:00',
+        ];
+
         return view('customer.reservations.create', [
-            'lapangan' => $this->lapanganList(),
-            'user'     => $user,
+            'lapangan'  => $this->lapanganList(),
+            'user'      => $user,
+            'prefilled' => $prefilled,
         ]);
     }
 
@@ -166,19 +175,15 @@ class CustomerBookingController extends Controller
     }
 
     /**
-     * HYBRID JADWAL GRID:
-     * JIKA DIAKSES MANUAL OLEH BROWSER (BUKAN AJAX) => MERENDER VIEW KALENDER VISUAL
-     * JIKA DIPANGGIL VIA JAVASCRIPT FETCH => MENGEMBALIKAN DATA JSON
+     * HYBRID JADWAL GRID
      */
     public function jadwalGrid(Request $request)
     {
-        // 1. Deteksi apakah diakses langsung via browser URL
         if (!$request->ajax() && !$request->wantsJson() && !$request->has('lapangan')) {
             $lapangan = $this->lapanganList();
             return view('customer.schedules.index', compact('lapangan'));
         }
 
-        // 2. Jika dipanggil fetch JSON untuk kalkulasi jadwal slot
         $field = $request->lapangan ?? 'Lapangan 1';
         $date  = $request->date ?? date('Y-m-d');
         $hours = range(8, 22);

@@ -13,9 +13,13 @@ class CheckCustomerData
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
         $user = Auth::user();
 
-        if (!$user->phone) {
+        if (empty($user->phone)) {
             return redirect()
                 ->route('customer.customer.form')
                 ->with('warning', 'Silakan isi data diri terlebih dahulu sebelum booking.');

@@ -1,13 +1,10 @@
 <?php
 
-// Force log & cache configuration
+// Force log channel ke stderr Vercel
 putenv('LOG_CHANNEL=stderr');
-putenv('CACHE_DRIVER=file');
-putenv('CACHE_STORE=file');
-putenv('SESSION_DRIVER=file');
-putenv('SESSION_LIFETIME=120');
+putenv('APP_DEBUG=true');
 
-// Force direktori cache Laravel ke /tmp
+// Arahkan cache internal Laravel ke /tmp
 putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
 putenv('APP_SERVICES_CACHE=/tmp/services.php');
 putenv('APP_CONFIG_CACHE=/tmp/config.php');
@@ -22,9 +19,10 @@ $storagePaths = [
     '/tmp/storage/framework/sessions',
     '/tmp/storage/logs',
 ];
+
 foreach ($storagePaths as $path) {
     if (!is_dir($path)) {
-        mkdir($path, 0777, true);
+        @mkdir($path, 0777, true);
     }
 }
 
@@ -35,10 +33,11 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 // Gunakan /tmp sebagai root storage runtime
 $app->useStoragePath('/tmp/storage');
 
-// Pastikan konfigurasi session lifetime bernilai integer murni
 $app->booted(function () use ($app) {
     $app['config']->set('session.lifetime', 120);
-    $app['config']->set('session.driver', 'file');
+    $app['config']->set('session.files', '/tmp/storage/framework/sessions');
+    $app['config']->set('view.compiled', '/tmp/storage/framework/views');
+    $app['config']->set('cache.stores.file.path', '/tmp/storage/framework/cache/data');
 });
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
