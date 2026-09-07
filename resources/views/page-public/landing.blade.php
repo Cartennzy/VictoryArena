@@ -131,7 +131,7 @@
             </div>
         </nav>
 
-        {{-- Mobile Dropdown Menu (Clean Mobile SaaS Sheet) --}}
+        {{-- Mobile Dropdown Menu --}}
         <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800/90 bg-[#090e1c] px-5 py-4 space-y-2 transition-all duration-300 shadow-2xl">
             <a href="#" onclick="toggleMobileMenu()" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">
                 <i class="fa fa-home w-4 text-red-500"></i> Home
@@ -440,11 +440,12 @@
             </div>
         </section>
 
-        {{-- ================= HIGHLIGHT CARDS ================= --}}
+        {{-- ================= HIGHLIGHT CARDS (CLEAN TANPA CTA) ================= --}}
         <section class="py-16 sm:py-20 border-b border-slate-800/80 bg-[#070b16]" id="fasilitas">
             <div class="max-w-7xl mx-auto px-5 sm:px-6">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     
+                    {{-- Facility Spotlight --}}
                     <div class="lg:col-span-6 rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
                         <div class="absolute top-0 left-0 bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3 sm:px-4 py-1 rounded-br-xl">
                             FACILITY SPOTLIGHT
@@ -457,15 +458,13 @@
                                      onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80';">
                             </div>
                             <h3 class="text-xl sm:text-2xl font-black uppercase text-white mb-2">Standar Lantai Vinyl Anti-Selip</h3>
-                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
                                 Dirancang khusus untuk meredam benturan sendi dan mempercepat akselerasi lari. Dilengkapi blower silang agar sirkulasi udara lapangan tetap sejuk saat tensi laga memanas.
                             </p>
                         </div>
-                        <a href="#lapangan" class="btn-action self-start px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-red-600 text-slate-200 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors">
-                            Pelajari Spesifikasi <i class="fa fa-arrow-right ml-2 text-[10px]"></i>
-                        </a>
                     </div>
 
+                    {{-- Reservation Experience --}}
                     <div class="lg:col-span-6 rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
                         <div class="absolute top-0 left-0 bg-red-600 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3 sm:px-4 py-1 rounded-br-xl">
                             RESERVATION EXPERIENCE
@@ -487,12 +486,6 @@
                                     <i class="fa fa-check text-red-500"></i> Wasit & Rompi Tersedia
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-6 pt-6 border-t border-slate-800/80 flex justify-between items-center">
-                            <span class="text-xs text-slate-400">Siap bertanding malam ini?</span>
-                            <a href="#lapangan" class="btn-action px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider">
-                                Pilih Lapangan
-                            </a>
                         </div>
                     </div>
 
