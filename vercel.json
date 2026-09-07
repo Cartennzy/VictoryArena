@@ -8,6 +8,10 @@
   },
   "routes": [
     {
+      "src": "/build/(.*)",
+      "dest": "/public/build/$1"
+    },
+    {
       "src": "/css/(.*)",
       "dest": "/public/css/$1"
     },
@@ -20,6 +24,10 @@
       "dest": "/public/images/$1"
     },
     {
+      "src": "/storage/(.*)",
+      "dest": "/public/storage/$1"
+    },
+    {
       "src": "/favicon.ico",
       "dest": "/public/favicon.ico"
     },
@@ -30,6 +38,6 @@
   ],
   "env": {
     "APP_ENV": "production",
-    "APP_DEBUG": "true"
+    "APP_DEBUG": "false"
   }
 }
