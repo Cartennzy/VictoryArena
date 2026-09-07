@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   BASE
+================================ */
+@layer base {
+  body {
+    @apply bg-slate-100 text-slate-800 antialiased;
+  }
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+@layer components {
+  .sidebar {
+    @apply bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900
+           text-slate-200 w-64 min-h-screen
+           transition-all duration-300 shadow-2xl;
+  }
+
+  .sidebar.collapsed {
+    @apply w-20;
+  }
+
+  .sidebar .label,
+  .sidebar .subtitle {
+    @apply transition-opacity duration-200;
+  }
+
+  .sidebar.collapsed .label,
+  .sidebar.collapsed .subtitle {
+    @apply opacity-0 pointer-events-none;
+  }
+
+  .sidebar-item {
+    @apply relative flex items-center gap-3
+           px-4 py-3 rounded-xl
+           text-slate-300 font-medium
+           transition-all duration-300 overflow-hidden;
+  }
+
+  .sidebar-item::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2
+           w-1 h-0 bg-blue-500 rounded-full
+           transition-all duration-300;
+  }
+
+  .sidebar-item:hover {
+    @apply text-white bg-white/5;
+  }
+
+  .sidebar-item:hover::before {
+    @apply h-6;
+  }
+
+  .sidebar-item.active {
+    @apply bg-blue-600 text-white shadow-lg;
+  }
+
+  .sidebar-item.active::before {
+    @apply h-8;
+  }
+
+  /* ===============================
+     PAGE HEADER
+  ================================ */
+  .page-title {
+    @apply text-3xl font-bold tracking-tight text-slate-800;
+  }
+
+  /* ===============================
+     CARD BASE
+  ================================ */
+  .card {
+    @apply bg-white rounded-3xl p-6
+           border border-slate-200
+           shadow-md transition-all duration-300;
+  }
+
+  /* ===============================
+     KPI CARD (ULTRA)
+  ================================ */
+  .kpi {
+    @apply relative overflow-hidden rounded-3xl p-6
+           text-white shadow-xl
+           transition-all duration-500;
+  }
+
+  .kpi::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-tr
+           from-white/20 via-transparent to-transparent
+           opacity-0 transition-opacity duration-500;
+  }
+
+  .kpi::after {
+    content: '';
+    @apply absolute -left-full top-0 w-full h-full
+           bg-gradient-to-r from-transparent via-white/20 to-transparent
+           transition-all duration-700;
+  }
+
+  .kpi:hover::before {
+    @apply opacity-100;
+  }
+
+  .kpi:hover::after {
+    @apply left-full;
+  }
+
+  .kpi:hover {
+    @apply -translate-y-3 scale-[1.02] shadow-2xl;
+  }
+
+  .kpi-blue {
+    @apply bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800;
+  }
+
+  .kpi-green {
+    @apply bg-gradient-to-br from-emerald-600 via-green-700 to-emerald-800;
+  }
+
+  .kpi-orange {
+    @apply bg-gradient-to-br from-orange-500 via-amber-600 to-orange-700;
+  }
+
+  .kpi-icon {
+    @apply absolute right-6 bottom-6
+           w-16 h-16 rounded-2xl
+           bg-white/20 backdrop-blur-md
+           flex items-center justify-center
+           text-3xl shadow-lg;
+  }
+
+  /* ===============================
+     TABLE
+  ================================ */
+  .table-wrapper {
+    @apply bg-white rounded-3xl
+           border border-slate-200
+           shadow-md overflow-hidden;
+  }
+
+  table thead {
+    @apply bg-slate-100 text-slate-700;
+  }
+
+  table tbody tr {
+    @apply transition-all duration-300;
+  }
+
+  table tbody tr:hover {
+    @apply bg-blue-50 scale-[1.01];
+  }
+
+  /* ===============================
+     BADGE
+  ================================ */
+  .badge {
+    @apply px-4 py-1 text-xs font-semibold
+           rounded-full tracking-wide;
+  }
+
+  .badge-success {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+}
