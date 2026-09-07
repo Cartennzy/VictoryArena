@@ -3,101 +3,97 @@
 
 @section('content')
 
-{{-- ================= CUSTOM STYLES & INTERACTION ANIMATIONS ================= --}}
+{{-- ================= STYLES SAAS & INTERACTION ANIMATIONS ================= --}}
 <style>
     .font-sports {
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
         letter-spacing: -0.02em;
     }
 
     @keyframes heroFadeUp {
-        0% {
-            opacity: 0;
-            transform: translateY(28px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        0% { opacity: 0; transform: translateY(24px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes pulseGlow {
-        0%, 100% { opacity: 0.35; transform: scale(1); }
-        50% { opacity: 0.6; transform: scale(1.08); }
+        0%, 100% { opacity: 0.25; transform: scale(1); }
+        50% { opacity: 0.55; transform: scale(1.08); }
     }
 
     @keyframes rippleAnim {
-        0% {
-            transform: scale(0);
-            opacity: 0.55;
-        }
-        100% {
-            transform: scale(3.2);
-            opacity: 0;
-        }
+        0% { transform: scale(0); opacity: 0.55; }
+        100% { transform: scale(3.5); opacity: 0; }
     }
 
     .animate-hero {
-        animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .anim-delay-1 { animation-delay: 120ms; }
-    .anim-delay-2 { animation-delay: 240ms; }
 
+    /* Production Button System with Active State & Elevation */
     .btn-action {
         position: relative;
         overflow: hidden;
         user-select: none;
-        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
     }
     .btn-action:hover {
-        transform: translateY(-2px);
+        transform: translateY(-2.5px);
     }
     .btn-action:active {
-        transform: translateY(1px) scale(0.97) !important;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+        transform: translateY(1.5px) scale(0.97) !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
     }
+
+    /* Ripple Wave Animation Element */
     .ripple-wave {
         position: absolute;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.45);
+        background-color: rgba(255, 255, 255, 0.4);
         pointer-events: none;
         transform: scale(0);
         animation: rippleAnim 0.65s cubic-bezier(0, 0, 0.2, 1);
     }
 
-    .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
+    /* Card Micro-interactions */
+    .saas-card {
+        background: #0f1523;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                    border-color 0.25s ease, 
+                    box-shadow 0.25s ease;
     }
-    .custom-scrollbar::-webkit-scrollbar-track {
-        background: #0f172a;
-        border-radius: 8px;
+    .saas-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(229, 9, 20, 0.5);
+        box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.8), 
+                    0 0 25px 0 rgba(229, 9, 20, 0.15);
     }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #334155;
-        border-radius: 8px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #dc2626;
-    }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0b0f19; border-radius: 8px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #242c3d; border-radius: 8px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #e50914; }
 </style>
 
 <div class="bg-[#080d1a] text-slate-100 font-sports min-h-screen selection:bg-red-600 selection:text-white flex flex-col justify-between">
 
-    {{-- ================= NAVBAR (SATU PINTU MASUK) ================= --}}
-    <header class="sticky top-0 z-40 bg-[#080d1a]/95 backdrop-blur-md border-b border-slate-800">
-        <div class="bg-red-600 text-[11px] font-black uppercase tracking-widest text-white py-1 px-6 text-center">
-            The Official Booking Portal of Victory Arena • One Team, One Dream
+    {{-- ================= TOP BANNER & NAVBAR ================= --}}
+    <header class="sticky top-0 z-40 bg-[#080d1a]/90 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-[11px] font-black uppercase tracking-widest text-white py-1.5 px-6 text-center shadow-md">
+            <i class="fa-solid fa-trophy mr-1 text-yellow-300"></i> The Official Booking Portal of Victory Arena • One Team, One Dream
         </div>
 
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-            <a href="#" class="flex items-center gap-3 shrink-0">
-                <div class="w-11 h-11 rounded-full overflow-hidden bg-slate-900 border-2 border-red-600 shadow-md shadow-red-600/30 flex items-center justify-center p-0.5 shrink-0">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 shrink-0 group">
+                <div class="w-11 h-11 rounded-2xl overflow-hidden bg-slate-900 border border-red-600/40 shadow-lg shadow-red-600/20 flex items-center justify-center p-1 shrink-0 group-hover:scale-105 transition-transform">
                     <img src="{{ asset('assets/logo-victory-arena.png') }}" 
                          alt="Victory Arena Logo" 
-                         class="w-full h-full object-cover rounded-full">
+                         class="w-full h-full object-contain"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-futbol text-red-500 text-xl\'></i>';">
                 </div>
                 <div>
                     <span class="text-lg sm:text-xl font-black uppercase tracking-wider text-white">VICTORY <span class="text-red-500">ARENA</span></span>
@@ -113,15 +109,14 @@
                 <a href="#kontak" class="hover:text-red-500 transition-colors">Kontak</a>
             </div>
 
-            {{-- 1 Tombol Login Tunggal --}}
             <div class="flex items-center gap-2.5">
-                <a href="{{ route('login') }}" class="btn-action px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-wider shadow-md shadow-red-600/30">
+                <a href="{{ route('login') }}" class="btn-action px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/30">
                     <i class="fa fa-user mr-2 text-xs"></i> Masuk / Login
                 </a>
 
                 <button type="button" 
                         onclick="toggleMobileMenu()" 
-                        class="md:hidden w-10 h-10 rounded-xl bg-slate-900 border border-slate-750 flex items-center justify-center text-slate-200 hover:text-white hover:border-red-600 transition-colors focus:outline-none"
+                        class="md:hidden w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-200 hover:text-white hover:border-red-600 transition-colors focus:outline-none"
                         aria-label="Toggle Navigation">
                     <i id="menuIcon" class="fa fa-bars text-base"></i>
                 </button>
@@ -129,7 +124,7 @@
         </nav>
 
         {{-- Mobile Dropdown Menu --}}
-        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800/80 bg-slate-950/95 px-6 py-4 space-y-3 transition-all">
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800 bg-[#080d1a]/98 px-6 py-4 space-y-3 transition-all">
             <a href="#" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Home</a>
             <a href="#lapangan" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Arena & Jadwal</a>
             <a href="#harga" onclick="toggleMobileMenu()" class="block py-2 text-xs font-black uppercase tracking-wider text-slate-300 hover:text-red-500">Daftar Harga</a>
@@ -153,7 +148,7 @@
             <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
                 <div class="space-y-6 sm:space-y-8 animate-hero">
                     
-                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-red-950/60 border border-red-800/60 text-red-400 text-[11px] font-black tracking-widest uppercase mx-auto">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-red-950/60 border border-red-800/60 text-red-400 text-[11px] font-black tracking-widest uppercase mx-auto shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
                         Victory Arena • Official Booking Platform
                     </div>
@@ -171,19 +166,19 @@
 
                     <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
                         <a href="#lapangan" 
-                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-red-600/30">
+                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-red-600/35">
                             Pilih Lapangan & Jadwal
                             <i class="fa fa-arrow-right ml-3 text-xs"></i>
                         </a>
 
                         <a href="#harga" 
-                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-750 font-bold text-sm hover:border-slate-600">
+                           class="btn-action w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm hover:border-slate-500">
                             <i class="fa fa-tags mr-2 text-red-500"></i> Cek Tarif Sewa
                         </a>
                     </div>
 
                     <div class="max-w-xl mx-auto pt-4">
-                        <div class="bg-slate-900/80 border border-slate-800 backdrop-blur-md rounded-2xl p-4 sm:p-5 flex items-center justify-center gap-4 shadow-xl text-left">
+                        <div class="bg-slate-900/80 border border-slate-800/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 flex items-center justify-center gap-4 shadow-xl text-left">
                             <div class="w-10 h-10 rounded-xl bg-red-600/20 text-red-500 flex items-center justify-center shrink-0 border border-red-500/30">
                                 <i class="fa-solid fa-shield-halved text-lg"></i>
                             </div>
@@ -251,14 +246,15 @@
 
                 <div class="grid md:grid-cols-3 gap-8">
                     @for($i=1; $i<=3; $i++)
-                    <div class="group rounded-3xl bg-slate-900 border border-slate-800 hover:border-red-600/60 shadow-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5">
+                    <div class="saas-card group rounded-3xl overflow-hidden flex flex-col justify-between">
                         
                         <div>
-                            <div class="relative h-64 overflow-hidden">
+                            <div class="relative h-64 overflow-hidden bg-slate-950">
                                 <img src="{{ asset('assets/lapangan'.$i.'.jpg') }}"
                                      alt="Victory Field {{ $i }}"
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/30"></div>
+                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1529900241451-b8622e283128?w=800&q=80';">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0f1523] via-transparent to-black/30"></div>
 
                                 <div class="absolute top-4 left-4 z-10">
                                     <span class="px-3.5 py-1 bg-red-600 text-white font-black text-xs uppercase tracking-wider rounded-lg shadow-md">
@@ -333,7 +329,7 @@
                 <div class="grid md:grid-cols-3 gap-8 items-stretch">
                     
                     {{-- Slot Siang --}}
-                    <div class="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div class="rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
                         <div>
                             <span class="text-[11px] font-black uppercase tracking-widest text-slate-400">Regular Hours</span>
                             <h3 class="text-xl font-black uppercase text-white mt-1 mb-4">Slot Siang</h3>
@@ -361,7 +357,7 @@
                     </div>
 
                     {{-- Prime Time --}}
-                    <div class="rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-red-950/40 border-2 border-red-600 p-6 sm:p-8 flex flex-col justify-between relative shadow-2xl shadow-red-600/10">
+                    <div class="rounded-3xl bg-gradient-to-b from-[#141b2c] via-[#0f1523] to-red-950/40 border-2 border-red-600 p-6 sm:p-8 flex flex-col justify-between relative shadow-2xl shadow-red-600/15">
                         <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest px-4 py-1 rounded-full shadow-md whitespace-nowrap">
                             MOST POPULAR • PRIME TIME
                         </div>
@@ -387,13 +383,13 @@
                             </ul>
                         </div>
 
-                        <a href="#lapangan" class="btn-action w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/40">
+                        <a href="#lapangan" class="btn-action w-full py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-red-600/40">
                             Book Slot Malam Sekarang
                         </a>
                     </div>
 
                     {{-- Member Bulanan --}}
-                    <div class="rounded-3xl bg-slate-900 border border-slate-800 p-6 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div class="rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition-all">
                         <div>
                             <span class="text-[11px] font-black uppercase tracking-widest text-slate-400">Community Squad</span>
                             <h3 class="text-xl font-black uppercase text-white mt-1 mb-4">Member Bulanan</h3>
@@ -417,7 +413,7 @@
 
                         <a href="https://wa.me/628996602425?text=Halo%20Admin%20Victory%20Arena,%20saya%20ingin%20daftar%20Member%20Bulanan%20Futsal" 
                            target="_blank" 
-                           class="btn-action w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider">
+                           class="btn-action w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider">
                             <i class="fab fa-whatsapp mr-2 text-sm"></i> Hubungi via WhatsApp
                         </a>
                     </div>
@@ -427,17 +423,20 @@
         </section>
 
         {{-- ================= HIGHLIGHT CARDS ================= --}}
-        <section class="py-20 border-b border-slate-800/80 bg-[#0a1120]" id="fasilitas">
+        <section class="py-20 border-b border-slate-800/80 bg-[#070b16]" id="fasilitas">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="grid lg:grid-cols-12 gap-8">
                     
-                    <div class="lg:col-span-6 rounded-3xl bg-slate-900/90 border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="lg:col-span-6 rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
                         <div class="absolute top-0 left-0 bg-red-600 text-white text-[11px] font-black uppercase tracking-wider px-4 py-1 rounded-br-xl">
                             FACILITY SPOTLIGHT
                         </div>
                         <div class="pt-4">
-                            <div class="rounded-2xl overflow-hidden mb-6 h-56 border border-slate-800">
-                                <img src="{{ asset('assets/lapangan1.jpg') }}" alt="Venue Highlight" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="rounded-2xl overflow-hidden mb-6 h-56 border border-slate-800 bg-slate-950">
+                                <img src="{{ asset('assets/lapangan1.jpg') }}" 
+                                     alt="Venue Highlight" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80';">
                             </div>
                             <h3 class="text-2xl font-black uppercase text-white mb-2">Standar Lantai Vinyl Anti-Selip</h3>
                             <p class="text-slate-400 text-sm leading-relaxed mb-6">
@@ -449,13 +448,16 @@
                         </a>
                     </div>
 
-                    <div class="lg:col-span-6 rounded-3xl bg-slate-900/90 border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="lg:col-span-6 rounded-3xl bg-[#0f1523] border border-slate-800 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group">
                         <div class="absolute top-0 left-0 bg-red-600 text-white text-[11px] font-black uppercase tracking-wider px-4 py-1 rounded-br-xl">
                             RESERVATION EXPERIENCE
                         </div>
                         <div class="pt-4 flex flex-col sm:flex-row gap-6 items-center">
-                            <div class="w-full sm:w-1/2 rounded-2xl overflow-hidden h-56 border border-slate-800">
-                                <img src="{{ asset('assets/lapangan2.jpg') }}" alt="Match Management" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="w-full sm:w-1/2 rounded-2xl overflow-hidden h-56 border border-slate-800 bg-slate-950">
+                                <img src="{{ asset('assets/lapangan2.jpg') }}" 
+                                     alt="Match Management" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1529900241451-b8622e283128?w=800&q=80';">
                             </div>
                             <div class="w-full sm:w-1/2">
                                 <p class="text-red-500 text-xs font-black uppercase tracking-widest mb-1">Instant Access</p>
@@ -499,7 +501,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <a href="#lapangan" class="btn-action px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-red-600/30">
+                        <a href="#lapangan" class="btn-action px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-red-600/30">
                             Cek Ketersediaan Jam <i class="fa fa-chevron-right ml-2 text-xs"></i>
                         </a>
                     </div>
@@ -545,16 +547,17 @@
     </div>
 
     {{-- ================= FOOTER ================= --}}
-    <footer class="bg-slate-950 border-t border-slate-800/80 pt-16 pb-8" id="kontak">
+    <footer class="bg-[#050811] border-t border-slate-800/80 pt-16 pb-8" id="kontak">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">
                 
                 <div class="md:col-span-5 space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-900 border-2 border-red-600 shadow-md shadow-red-600/30 flex items-center justify-center p-0.5 shrink-0">
+                        <div class="w-12 h-12 rounded-2xl overflow-hidden bg-slate-900 border border-red-600/40 shadow-md shadow-red-600/20 flex items-center justify-center p-1 shrink-0">
                             <img src="{{ asset('assets/logo-victory-arena.png') }}" 
                                  alt="Victory Arena Logo" 
-                                 class="w-full h-full object-cover rounded-full">
+                                 class="w-full h-full object-contain"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\'fa-solid fa-futbol text-red-500 text-2xl\'></i>';">
                         </div>
                         <div>
                             <span class="text-xl font-black uppercase tracking-wider text-white">VICTORY <span class="text-red-500">ARENA</span></span>
@@ -565,10 +568,10 @@
                         Pusat pelatihan dan arena futsal modern di Grand Wisata. Menyediakan fasilitas terbaik untuk mabar komunitas maupun turnamen profesional antar-klub.
                     </p>
                     <div class="flex items-center gap-3 pt-2">
-                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-facebook-f text-xs"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-whatsapp text-xs"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-youtube text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-instagram text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-whatsapp text-xs"></i></a>
+                        <a href="#" class="btn-action w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 transition-colors"><i class="fab fa-youtube text-xs"></i></a>
                     </div>
                 </div>
 
@@ -745,34 +748,6 @@ function confirmBooking(start, end) {
     if (!confirm(`Konfirmasi Reservasi ${selectedLapangan}\nJam: ${start} - ${end}?`)) return;
     location.href = `/booking?field=${selectedLapangan}&start_time=${start}&end_time=${end}`;
 }
-
-// Universal Ripple Script
-document.addEventListener('click', function(e) {
-    const btn = e.target.closest('.btn-action');
-    if (!btn || btn.hasAttribute('disabled')) return;
-
-    const rect = btn.getBoundingClientRect();
-    const ripple = document.createElement('span');
-    
-    const diameter = Math.max(rect.width, rect.height);
-    const radius = diameter / 2;
-
-    ripple.style.width = ripple.style.height = `${diameter}px`;
-    ripple.style.left = `${e.clientX - rect.left - radius}px`;
-    ripple.style.top = `${e.clientY - rect.top - radius}px`;
-    ripple.classList.add('ripple-wave');
-
-    const existingRipple = btn.querySelector('.ripple-wave');
-    if (existingRipple) {
-        existingRipple.remove();
-    }
-
-    btn.appendChild(ripple);
-
-    setTimeout(() => {
-        ripple.remove();
-    }, 650);
-});
 </script>
 
 @endsection
